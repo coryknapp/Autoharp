@@ -71,6 +71,8 @@ namespace PopToRelatedFile.Services
                 }
             }
 
+            this.MostRecentlyPoppedToFilePath = relatedFiles.First();
+
             return relatedFiles;
         }
 

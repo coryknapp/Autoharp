@@ -1,16 +1,21 @@
-﻿using Microsoft.VisualStudio.Text;
+﻿using PopToRelatedFile.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PopToRelatedFile.Services
 {
     public interface IDocumentService
     {
-        bool FileExists(string filePath);
+        bool FileExists(File file);
 
-        Task<string> FilePath(ITextDocument document);
+        Task<File> GetCurrentFileAsync();
 
-        bool IsType(ITextDocument document, string type);
+        File GetFileForDocumentView(DocumentView documentView);
 
-        string GetDocumentText(ITextDocument document);
+        Task<bool> IsTypeAsync(File file, string type);
+
+        Task<string> GetDocumentTextAsync(File file);
+
+        Task<IEnumerable<File>> GetAllFilesAsync(Func<File, bool> filter = null);
     }
 }

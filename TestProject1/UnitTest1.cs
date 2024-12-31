@@ -1,13 +1,15 @@
-using Microsoft.VisualStudio.Text;
-using Moq;
-using PopToRelatedFile.Services;
+using PopToRelatedFile;
 
-namespace TestProject
+namespace TestProject1
 {
-    [TestClass]
-    public class CshtmlLinkedJsRelatedFileDetectorTests
+    public class Tests
     {
-        [TestMethod]
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+        [Test]
         public async Task CshtmlLinkedJsRelatedFileDetectorTestsAsync()
         {
             var documentServiceMock = new Mock<IDocumentService>();
@@ -18,15 +20,18 @@ namespace TestProject
                 @"
             <html>
                 <head>
-                    <script src='https://example.com/script1.js'></script>
-                    <script src=""https://example.com/script2.js""></script>
+                    <script src='~/script1.js'></script>
+                    <script src=""~/script2.js""></script>
+                    <script src=""https://example.com/script.js""></script>
                     <script>console.log('Inline script');</script>
                 </head>
                 <body></body>
             </html>");
 
+            var solutionServiceMock = new Mock<ISolutionService>();
+            solutionServiceMock.Setup(s => s.GetAllFilesAsync()).Returns(new List<SolutionItem>());
 
-            var detector = new CshtmlLinkedJsRelatedFileDetector(documentServiceMock.Object);
+            var detector = new CshtmlLinkedJsRelatedFileDetector(documentServiceMock.Object, solutionServiceMock.Object);
 
             var textDocumentMock = new Mock<ITextDocument>();
 

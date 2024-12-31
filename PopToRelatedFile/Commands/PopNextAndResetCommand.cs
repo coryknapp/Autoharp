@@ -20,15 +20,10 @@ namespace PopToRelatedFile
             this.popNextService = popNextService;
         }
 
-        public PopNextAndResetCommand(DIToolkitPackage package) : base(package)
-        {
-            this.popNextService = popNextService;
-        }
-
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
-            await this.popNextService.ResetOrigin();
-            await this.popNextService.GoToNextFile();
+            await this.popNextService.ResetOriginAsync();
+            await this.popNextService.GoToNextFileAsync();
         }
     }
 }

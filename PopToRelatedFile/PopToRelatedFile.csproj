@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Commands\PopNextAndResetCommand.cs" />
     <Compile Include="Commands\PopNextCommand.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PopToRelatedFilePackage.cs" />
     <Compile Include="RelatedFileDetector\CshtmlLinkedJsRelatedFileDetector.cs" />

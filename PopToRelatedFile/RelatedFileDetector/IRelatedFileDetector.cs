@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Text;
+using PopToRelatedFile.Models;
 using PopToRelatedFile.Services;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace PopToRelatedFile
 {
     public interface IRelatedFileDetector
     {
-        Task<List<string>> CorrespondingFiles(ITextDocument document);
+        Task<IEnumerable<File>> CorrespondingFilesAsync(File document);
 
-        Task<bool> IsType(ITextDocument document);
+        Task<bool> IsTypeAsync(File document);
     }
 }

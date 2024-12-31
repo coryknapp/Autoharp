@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.Text;
+using PopToRelatedFile.Models;
 using PopToRelatedFile.Services;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PopToRelatedFile
@@ -18,34 +16,27 @@ namespace PopToRelatedFile
             this.documentService = documentService;
         }
 
-        public async Task<List<string>> CorrespondingFiles(ITextDocument document)
+        public async Task<IEnumerable<File>> CorrespondingFilesAsync(File file)
         {
-            return this.CorrespondingCshtmlFiles(await this.documentService.FilePath(document));
+            return this.CorrespondingCshtmlFiles(file);
         }
 
-        public async Task<bool> IsType(ITextDocument document)
+        public async Task<bool> IsTypeAsync(File file) =>
+            await documentService.IsTypeAsync(file, "CSharp") && !file.FullPath.EndsWith(".cshtml");
+
+
+        private IEnumerable<File> CorrespondingCshtmlFiles(File file)
         {
-            var path = await documentService.FilePath(document);
-            return documentService.IsType(document, "CSharp") && !path.EndsWith(".cshtml");
-        }
-
-
-        private List<string> CorrespondingCshtmlFiles(string filePath)
-        {
-
-            var cshtmlPath = this.CshtmlPath(filePath);
-            if (documentService.FileExists(cshtmlPath))
+            var cshtmlFile = this.CshtmlFile(file);
+            if (documentService.FileExists(cshtmlFile))
             {
-                return new List<string> { cshtmlPath };
+                return new List<File> { cshtmlFile };
             }
             
-            return new List<string>();
+            return Enumerable.Empty<File>();
         }
 
-        private string CshtmlPath(string filePath)
-        {
-            return filePath.Substring(0, filePath.Length - ".cs".Length);
-        }
-
+        private File CshtmlFile(File file) =>
+            new File(file.FullPath.Substring(0, file.FullPath.Length - 3));
     }
 }

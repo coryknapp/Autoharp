@@ -21,7 +21,6 @@ namespace PopToRelatedFile
     {
         protected override void InitializeServices(IServiceCollection services)
         {
-            base.InitializeServices(services);
 
             // Register your services here
             services.AddSingleton<IDocumentService, DocumentService>();
@@ -29,11 +28,12 @@ namespace PopToRelatedFile
 
             services.AddSingleton<CsRelatedFileDetector>();
             services.AddSingleton<CshtmlRelatedFileDetector>();
-            //services.AddSingleton<CshtmlLinkedJsRelatedFileDetector>();
+            services.AddSingleton<CshtmlLinkedJsRelatedFileDetector>();
 
             services.AddSingleton<PopNextAndResetCommand>();
             services.AddSingleton<PopNextCommand>();
 
+            base.InitializeServices(services);
             // Automatically register all commands in an assembly.
             //services.RegisterCommands(ServiceLifetime.Singleton);
         }

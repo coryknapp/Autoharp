@@ -22,7 +22,7 @@ namespace PopToRelatedFile
 
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
-            await this.popNextService.GoToNextFile();
+            await this.popNextService.GoToNextFileAsync();
         }
 
     }

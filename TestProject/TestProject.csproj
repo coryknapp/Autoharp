@@ -19,12 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PopToRelatedFile\Autoharp.csproj" />
+    <ProjectReference Include="..\Autoharp\Autoharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Community.VisualStudio.Toolkit">
-      <HintPath>..\PopToRelatedFile\bin\Debug\Community.VisualStudio.Toolkit.dll</HintPath>
+      <HintPath>..\Autoharp\bin\Debug\Community.VisualStudio.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
 

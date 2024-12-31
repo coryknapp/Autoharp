@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.Text;
 using Moq;
 using Autoharp.Services;
 using Autoharp.Models;
-using File = PopToRelatedFile.Models.File;
+using File = Autoharp.Models.File;
 
 namespace TestProject
 {

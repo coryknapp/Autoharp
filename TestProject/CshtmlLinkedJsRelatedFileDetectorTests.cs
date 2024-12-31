@@ -1,9 +1,9 @@
 using Community.VisualStudio.Toolkit;
 using Microsoft.VisualStudio.Text;
 using Moq;
-using PopToRelatedFile.Services;
-using PopToRelatedFile.Models;
-using File = PopToRelatedFile.Models.File;
+using Autoharp.Services;
+using Autoharp.Models;
+using File = Autoharp.Models.File;
 
 namespace TestProject
 {

@@ -4,20 +4,20 @@ global using System;
 global using Task = System.Threading.Tasks.Task;
 using Community.VisualStudio.Toolkit.DependencyInjection.Microsoft;
 using Microsoft.Extensions.DependencyInjection;
-using PopToRelatedFile.Services;
+using Autoharp.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(PackageGuids.PopToRelatedFileString)]
-    public sealed class PopToRelatedFilePackage : MicrosoftDIToolkitPackage<PopToRelatedFilePackage>
+    [Guid(PackageGuids.AutoharpString)]
+    public sealed class AutoharpFilePackage : MicrosoftDIToolkitPackage<AutoharpFilePackage>
     {
         protected override void InitializeServices(IServiceCollection services)
         {

@@ -1,13 +1,13 @@
 ﻿using Microsoft.VisualStudio.Text;
-using PopToRelatedFile.Models;
-using PopToRelatedFile.Services;
+using Autoharp.Models;
+using Autoharp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     public interface IRelatedFileDetector
     {

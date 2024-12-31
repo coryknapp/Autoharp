@@ -1,8 +1,8 @@
-﻿using PopToRelatedFile.Models;
+﻿using Autoharp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile.Services
+namespace Autoharp.Services
 {
     public interface IDocumentService
     {

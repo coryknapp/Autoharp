@@ -1,11 +1,11 @@
 ﻿using Community.VisualStudio.Toolkit.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using PopToRelatedFile.Models;
+using Autoharp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile.Services
+namespace Autoharp.Services
 {
     public class PopNextService : IPopNextService
     {
@@ -54,7 +54,7 @@ namespace PopToRelatedFile.Services
 
             this.RelatedFileList = await this.GetRelatedFilesAsync(file);
             this.OriginFilePath = filePath;
-            await VS.StatusBar.ShowMessageAsync($"PopToRelatedFile origin: '{System.IO.Path.GetFileName(filePath)}'.  Found {this.RelatedFileList.Count} files.");
+            await VS.StatusBar.ShowMessageAsync($"Autoharp origin: '{System.IO.Path.GetFileName(filePath)}'.  Found {this.RelatedFileList.Count} files.");
         }
 
         private async Task<List<File>> GetRelatedFilesAsync(File file)

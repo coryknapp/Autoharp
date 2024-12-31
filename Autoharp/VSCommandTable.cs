@@ -5,15 +5,15 @@
 // ------------------------------------------------------------------------------
 using System;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     /// <summary>
     /// Helper class that exposes all GUIDs used across VS Package.
     /// </summary>
     internal sealed partial class PackageGuids
     {
-        public const string PopToRelatedFileString = "0c7b3a28-fa5f-45db-bf1d-9a2b6ac06ff4";
-        public static Guid PopToRelatedFile = new Guid(PopToRelatedFileString);
+        public const string AutoharpString = "0c7b3a28-fa5f-45db-bf1d-9a2b6ac06ff4";
+        public static Guid Autoharp = new Guid(AutoharpString);
     }
     /// <summary>
     /// Helper class that encapsulates all CommandIDs uses across VS Package.

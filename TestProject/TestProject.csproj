@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PopToRelatedFile\PopToRelatedFile.csproj" />
+    <ProjectReference Include="..\PopToRelatedFile\Autoharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

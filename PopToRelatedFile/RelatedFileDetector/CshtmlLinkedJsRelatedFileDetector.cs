@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.Text;
-using PopToRelatedFile.Services;
+using Autoharp.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PopToRelatedFile.Models;
+using Autoharp.Models;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     public class CshtmlLinkedJsRelatedFileDetector : IRelatedFileDetector
     {

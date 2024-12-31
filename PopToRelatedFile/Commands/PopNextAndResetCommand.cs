@@ -2,13 +2,13 @@
 using Community.VisualStudio.Toolkit.DependencyInjection.Core;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
-using PopToRelatedFile.Services;
+using Autoharp.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     [Command(PackageIds.PopNextAndResetCommand)]
     public class PopNextAndResetCommand : BaseDICommand

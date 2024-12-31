@@ -5,7 +5,7 @@
 // ------------------------------------------------------------------------------
 using System;
 
-namespace PopToRelatedFile
+namespace Autoharp
 {
     /// <summary>
     /// Helper class that exposes all GUIDs used across VS Package.

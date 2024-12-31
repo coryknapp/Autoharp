@@ -1,5 +1,5 @@
 ﻿
-namespace PopToRelatedFile.Services
+namespace Autoharp.Services
 {
     public interface IPopNextService
     {

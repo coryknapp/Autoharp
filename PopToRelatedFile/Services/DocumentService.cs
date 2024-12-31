@@ -1,11 +1,11 @@
 ﻿using Community.VisualStudio.Toolkit.DependencyInjection;
 using Microsoft.VisualStudio.Text;
-using PopToRelatedFile.Models;
+using Autoharp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PopToRelatedFile.Services
+namespace Autoharp.Services
 {
     public class DocumentService : IDocumentService
     {

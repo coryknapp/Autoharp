@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Text;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace Autoharp.Models
         }
 
         // Should only be touched by the DocumentService.  Separation of concerns.
-        public Microsoft.VisualStudio.Text.ITextDocument TextDocument { get; set; }
+        // IDocumentService.GetDocumentTextAsync(Autoharp.Models.File) to get text
+        // instead of this member
+        public ITextDocument TextDocument { get; set; }
 
         public string FullPath {get; set; }
 

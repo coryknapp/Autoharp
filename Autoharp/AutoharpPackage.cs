@@ -16,8 +16,8 @@ namespace Autoharp
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(PackageGuids.PopToRelatedFileString)]
-    public sealed class PopToRelatedFilePackage : MicrosoftDIToolkitPackage<PopToRelatedFilePackage>
+    [Guid(PackageGuids.AutoharpString)]
+    public sealed class AutoharpPackage : MicrosoftDIToolkitPackage<AutoharpPackage>
     {
         protected override void InitializeServices(IServiceCollection services)
         {
@@ -26,8 +26,9 @@ namespace Autoharp
             services.AddSingleton<IDocumentService, DocumentService>();
             services.AddSingleton<IPopNextService, PopNextService>();
 
-            services.AddSingleton<CsRelatedFileDetector>();
-            services.AddSingleton<CshtmlRelatedFileDetector>();
+            services.AddSingleton<CsToCshtmlFileDetector>();
+            services.AddSingleton<CshtmlToCsFileDetector>();
+            services.AddSingleton<CsInterfaceFileDetector>();
             services.AddSingleton<CshtmlLinkedJsRelatedFileDetector>();
 
             services.AddSingleton<PopNextAndResetCommand>();

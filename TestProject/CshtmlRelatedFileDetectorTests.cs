@@ -15,7 +15,7 @@ namespace TestProject
 
             var documentService = DocumentServiceHelper.GetDocumentServiceMock();
 
-            var detector = new CshtmlRelatedFileDetector(documentService.Object);
+            var detector = new CshtmlToCsFileDetector(documentService.Object);
 
             var originFile = new File("C:\\code\\test.cshtml");
 

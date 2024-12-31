@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Autoharp
 {
-    public class CshtmlRelatedFileDetector : IRelatedFileDetector
+    public class CshtmlToCsFileDetector : IRelatedFileDetector
     {
         IDocumentService documentService;
 
-        public CshtmlRelatedFileDetector(IDocumentService documentService)
+        public CshtmlToCsFileDetector(IDocumentService documentService)
         {
             this.documentService = documentService;
         }

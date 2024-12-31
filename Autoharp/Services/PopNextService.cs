@@ -29,8 +29,9 @@ namespace Autoharp.Services
         {
             this.relatedFileDetectors = new List<IRelatedFileDetector>()
             {
-                package.ServiceProvider.GetService<CsRelatedFileDetector>(),
-                package.ServiceProvider.GetService<CshtmlRelatedFileDetector>(),
+                package.ServiceProvider.GetService<CsToCshtmlFileDetector>(),
+                package.ServiceProvider.GetService<CshtmlToCsFileDetector>(),
+                package.ServiceProvider.GetService<CsInterfaceFileDetector>(),
                 package.ServiceProvider.GetService<CshtmlLinkedJsRelatedFileDetector>(),
             };
         }

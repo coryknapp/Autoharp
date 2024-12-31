@@ -18,7 +18,7 @@ namespace PopToRelatedFile
 
         public async Task<IEnumerable<File>> CorrespondingFilesAsync(File file)
         {
-            return this.CorrespondingCshtmlFiles(file);
+            return await Task.Run(() => this.CorrespondingCshtmlFiles(file));
         }
 
         public async Task<bool> IsTypeAsync(File file) =>

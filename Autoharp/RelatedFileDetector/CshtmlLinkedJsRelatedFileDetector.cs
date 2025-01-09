@@ -60,6 +60,6 @@ namespace Autoharp
             new Func<File, bool>(item => fileNames.Contains(System.IO.Path.GetFileName(item.FullPath)));
 
         public async Task<bool> IsTypeAsync(File file) =>
-            file.FullPath.EndsWith(".cshtml");
+            await Task.Run(() => file.FullPath.EndsWith(".cshtml"));
     }
 }

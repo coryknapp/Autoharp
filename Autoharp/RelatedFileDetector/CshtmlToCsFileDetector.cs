@@ -21,11 +21,11 @@ namespace Autoharp
 
         public async Task<IEnumerable<File>> CorrespondingFilesAsync(File file)
         {
-            return this.CorrespondingCsFiles(file);
+            return await Task.Run(() => this.CorrespondingCsFiles(file));
         }
 
         public async Task<bool> IsTypeAsync(File file) =>
-            file.FullPath.EndsWith(".cshtml");
+            await Task.Run(() => file.FullPath.EndsWith(".cshtml"));
 
         private IEnumerable<File> CorrespondingCsFiles(File file)
         {

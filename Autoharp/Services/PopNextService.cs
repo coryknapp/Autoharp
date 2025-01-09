@@ -11,6 +11,8 @@ namespace Autoharp.Services
     {
         private IDocumentService documentService { get; set; }
 
+        private IInformationService informationService { get; set; }
+
         private List<IRelatedFileDetector> relatedFileDetectors;
 
         private List<File> RelatedFileList { get; set; }
@@ -19,9 +21,10 @@ namespace Autoharp.Services
 
         private string OriginFilePath { get; set; }
 
-        public PopNextService(DIToolkitPackage package, IDocumentService documentService)
+        public PopNextService(DIToolkitPackage package, IDocumentService documentService, IInformationService informationService)
         {
             this.documentService = documentService;
+            this.informationService = informationService;
             this.InitializeFileDetectors(package);
         }
 
@@ -55,18 +58,25 @@ namespace Autoharp.Services
 
             this.RelatedFileList = await this.GetRelatedFilesAsync(file);
             this.OriginFilePath = filePath;
-            await VS.StatusBar.ShowMessageAsync($"PopToRelatedFile origin: '{System.IO.Path.GetFileName(filePath)}'.  Found {this.RelatedFileList.Count} files.");
+            await informationService.InformResetOriginAsync(this.OriginFilePath, this.RelatedFileList);
         }
 
         private async Task<List<File>> GetRelatedFilesAsync(File file)
         {
             var currentFile = await documentService.GetCurrentFileAsync();
             var relatedFiles = new List<File>() { currentFile };
-            foreach (var rfd in relatedFileDetectors)
+            foreach (var detector in relatedFileDetectors)
             {
-                if (await rfd.IsTypeAsync(currentFile))
+                if (await detector.IsTypeAsync(currentFile))
                 {
-                    relatedFiles.AddRange(await rfd.CorrespondingFilesAsync(currentFile));
+                    try
+                    {
+                        relatedFiles.AddRange(await detector.CorrespondingFilesAsync(currentFile));
+                    }
+                    catch(Exception ex)
+                    {
+                        await informationService.LogErrorAsync(this.FormatErrorMessage(detector, ex));
+                    }
                 }
             }
 
@@ -88,5 +98,8 @@ namespace Autoharp.Services
             var nextIndex = (currentIndex + 1) % this.RelatedFileList.Count;
             return this.RelatedFileList[nextIndex].FullPath;
         }
+
+        private string FormatErrorMessage(IRelatedFileDetector detector, Exception ex) =>
+            $@"Error in ${detector.GetType().Name}: {ex.Message}";
     }
 }

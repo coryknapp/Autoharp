@@ -6,23 +6,23 @@
   <Include href="KnownImageIds.vsct"/>
   <Include href="VSGlobals.vsct"/>
 
-  <Commands package="PopToRelatedFile">
+  <Commands package="Autoharp">
 	  <Groups>
-		  <Group guid="PopToRelatedFile" id="MyCommandGroup" priority="0x1000">
+		  <Group guid="Autoharp" id="MyCommandGroup" priority="0x1000">
 			  <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
 		  </Group>
 	  </Groups>
 
 	  <Buttons>
-		  <Button guid="PopToRelatedFile" id="PopNextCommand" priority="0x0100" type="Button">
-			  <Parent guid="PopToRelatedFile" id="MyCommandGroup" />
+		  <Button guid="Autoharp" id="PopNextCommand" priority="0x0100" type="Button">
+			  <Parent guid="Autoharp" id="MyCommandGroup" />
 			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
 			  <Strings>
 				  <ButtonText>Pop to Next</ButtonText>
 			  </Strings>
 		  </Button>
-		  <Button guid="PopToRelatedFile" id="PopNextAndResetCommand" priority="0x0110" type="Button">
-			  <Parent guid="PopToRelatedFile" id="MyCommandGroup" />
+		  <Button guid="Autoharp" id="PopNextAndResetCommand" priority="0x0110" type="Button">
+			  <Parent guid="Autoharp" id="MyCommandGroup" />
 			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
 			  <Strings>
 				  <ButtonText>Reset and Pop to Next</ButtonText>
@@ -33,14 +33,14 @@
 
 	<KeyBindings>
 		<!-- VK_OEM_5 = '\' key -->
-		<KeyBinding guid="PopToRelatedFile" id="PopNextCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="alt shift" />
+		<KeyBinding guid="Autoharp" id="PopNextCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="alt shift" />
 		<!-- VK_OEM_5 = '\' key -->
-		<KeyBinding guid="PopToRelatedFile" id="PopNextAndResetCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="control alt shift" />
+		<KeyBinding guid="Autoharp" id="PopNextAndResetCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="control alt shift" />
 
 	</KeyBindings>
 
 	<Symbols>
-    <GuidSymbol name="PopToRelatedFile" value="{0c7b3a28-fa5f-45db-bf1d-9a2b6ac06ff4}">
+    <GuidSymbol name="Autoharp" value="{0c7b3a28-fa5f-45db-bf1d-9a2b6ac06ff4}">
 		<IDSymbol name="MyCommandGroup" value="0x1020" />
 		<IDSymbol name="PopNextCommand" value="0x0100" />
 		<IDSymbol name="PopNextAndResetCommand" value="0x0110" />

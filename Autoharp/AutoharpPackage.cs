@@ -25,6 +25,7 @@ namespace Autoharp
             // Register your services here
             services.AddSingleton<IDocumentService, DocumentService>();
             services.AddSingleton<IPopNextService, PopNextService>();
+            services.AddSingleton<IInformationService, InformationService>();
 
             services.AddSingleton<CsToCshtmlFileDetector>();
             services.AddSingleton<CshtmlToCsFileDetector>();

@@ -20,7 +20,7 @@ namespace Autoharp.Services
         public async Task LogErrorAsync(string message)
         {
             var outputWindowPane = await GetOutputWindowPaneAsync();
-            await outputWindowPane.WriteAsync(message);
+            await outputWindowPane.WriteLineAsync(message);
         }
 
         public async Task InformResetOriginAsync(string originFilePath, IEnumerable<File> relatedFileList)

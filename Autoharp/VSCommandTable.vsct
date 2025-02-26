@@ -14,18 +14,32 @@
 	  </Groups>
 
 	  <Buttons>
-		  <Button guid="Autoharp" id="PopNextCommand" priority="0x0100" type="Button">
+		  <Button guid="Autoharp" id="JumpNextCommand" priority="0x0100" type="Button">
 			  <Parent guid="Autoharp" id="MyCommandGroup" />
 			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
 			  <Strings>
-				  <ButtonText>Pop to Next</ButtonText>
+				  <ButtonText>Jump to Next</ButtonText>
 			  </Strings>
 		  </Button>
-		  <Button guid="Autoharp" id="PopNextAndResetCommand" priority="0x0110" type="Button">
+		  <Button guid="Autoharp" id="JumpNextAndResetCommand" priority="0x0110" type="Button">
 			  <Parent guid="Autoharp" id="MyCommandGroup" />
 			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
 			  <Strings>
-				  <ButtonText>Reset and Pop to Next</ButtonText>
+				  <ButtonText>Reset and Jump to Next</ButtonText>
+			  </Strings>
+		  </Button>
+		  <Button guid="Autoharp" id="AddToJumpListCommand" priority="0x0110" type="Button">
+			  <Parent guid="Autoharp" id="MyCommandGroup" />
+			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
+			  <Strings>
+				  <ButtonText>Add to Jump List</ButtonText>
+			  </Strings>
+		  </Button>
+		  <Button guid="Autoharp" id="RemoveFromJumpListCommand" priority="0x0110" type="Button">
+			  <Parent guid="Autoharp" id="MyCommandGroup" />
+			  <!-- Icon guid="guidYourIcons" id="bmpMyIcon" /-->
+			  <Strings>
+				  <ButtonText>Remove from Jump List</ButtonText>
 			  </Strings>
 		  </Button>
 	  </Buttons>
@@ -33,17 +47,27 @@
 
 	<KeyBindings>
 		<!-- VK_OEM_5 = '\' key -->
-		<KeyBinding guid="Autoharp" id="PopNextCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="alt shift" />
-		<!-- VK_OEM_5 = '\' key -->
-		<KeyBinding guid="Autoharp" id="PopNextAndResetCommand" editor="guidVSStd97" key1="VK_OEM_5" mod1="control alt shift" />
-
+		<KeyBinding guid="Autoharp" id="JumpNextCommand" editor="guidVSStd97"
+					key1="VK_OEM_5" mod1="alt shift"
+					key2="VK_OEM_5" mod2="alt shift"/>
+		<KeyBinding guid="Autoharp" id="JumpNextAndResetCommand" editor="guidVSStd97"
+					key1="VK_OEM_5" mod1="alt shift"
+					key2="b" mod2="alt shift"/>
+		<KeyBinding guid="Autoharp" id="AddToJumpListCommand" editor="guidVSStd97"
+					key1="VK_OEM_5" mod1="alt shift"
+					key2="a" mod2="alt shift"/>
+		<KeyBinding guid="Autoharp" id="RemoveFromJumpListCommand" editor="guidVSStd97"
+					key1="VK_OEM_5" mod1="alt shift"
+					key2="r" mod2="alt shift"/>
 	</KeyBindings>
 
 	<Symbols>
     <GuidSymbol name="Autoharp" value="{0c7b3a28-fa5f-45db-bf1d-9a2b6ac06ff4}">
 		<IDSymbol name="MyCommandGroup" value="0x1020" />
-		<IDSymbol name="PopNextCommand" value="0x0100" />
-		<IDSymbol name="PopNextAndResetCommand" value="0x0110" />
+		<IDSymbol name="JumpNextCommand" value="0x0100" />
+		<IDSymbol name="JumpNextAndResetCommand" value="0x0110" />
+		<IDSymbol name="AddToJumpListCommand" value="0x0120" />
+		<IDSymbol name="RemoveFromJumpListCommand" value="0x0130" />
 	</GuidSymbol>
   </Symbols>
 </CommandTable>

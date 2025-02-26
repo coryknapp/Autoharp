@@ -7,9 +7,9 @@ namespace TestProject
 {
     internal class DocumentServiceHelper
     {
-        public static Mock<IDocumentService> GetDocumentServiceMock(IEnumerable<string>? existingFilePaths = null, string? documentText = null)
+        public static Mock<IVsSolutionService> GetDocumentServiceMock(IEnumerable<string>? existingFilePaths = null, string? documentText = null)
         {
-            var documentServiceMock = new Mock<IDocumentService>();
+            var documentServiceMock = new Mock<IVsSolutionService>();
 
             if (existingFilePaths != null)
             {

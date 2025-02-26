@@ -25,7 +25,7 @@ namespace TestProject
 
             var originFile = new File("C:\\code\\test.cshtml.cs");
 
-            var detector = new CsInterfaceFileDetector(documentServiceMock.Object);
+            var detector = new CsClassAncestorsDetector(documentServiceMock.Object);
 
             var textDocumentMock = new Mock<ITextDocument>();
 

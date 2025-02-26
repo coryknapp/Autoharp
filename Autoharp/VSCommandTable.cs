@@ -21,7 +21,9 @@ namespace Autoharp
     internal sealed partial class PackageIds
     {
         public const int MyCommandGroup = 0x1020;
-        public const int PopNextCommand = 0x0100;
-        public const int PopNextAndResetCommand = 0x0110;
+        public const int JumpNextCommand = 0x0100;
+        public const int JumpNextAndResetCommand = 0x0110;
+        public const int AddToJumpListCommand = 0x0120;
+        public const int RemoveFromJumpListCommand = 0x0130;
     }
 }

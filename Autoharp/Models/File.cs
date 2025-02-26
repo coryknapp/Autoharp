@@ -16,7 +16,7 @@ namespace Autoharp.Models
         }
 
         // Should only be touched by the DocumentService.  Separation of concerns.
-        // IDocumentService.GetDocumentTextAsync(Autoharp.Models.File) to get text
+        // Use IDocumentService.GetDocumentTextAsync(Autoharp.Models.File) to get text
         // instead of this member
         public ITextDocument TextDocument { get; set; }
 

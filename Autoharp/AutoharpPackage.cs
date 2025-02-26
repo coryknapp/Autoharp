@@ -23,21 +23,17 @@ namespace Autoharp
         {
 
             // Register your services here
-            services.AddSingleton<IDocumentService, DocumentService>();
-            services.AddSingleton<IPopNextService, PopNextService>();
+            services.AddSingleton<IVsSolutionService, VsSolutionService>();
+            services.AddSingleton<IJumpNextService, JumpNextService>();
             services.AddSingleton<IInformationService, InformationService>();
 
             services.AddSingleton<CsToCshtmlFileDetector>();
             services.AddSingleton<CshtmlToCsFileDetector>();
-            services.AddSingleton<CsInterfaceFileDetector>();
+            services.AddSingleton<CsClassAncestorsDetector>();
             services.AddSingleton<CshtmlLinkedJsRelatedFileDetector>();
 
-            services.AddSingleton<PopNextAndResetCommand>();
-            services.AddSingleton<PopNextCommand>();
-
             base.InitializeServices(services);
-            // Automatically register all commands in an assembly.
-            //services.RegisterCommands(ServiceLifetime.Singleton);
+            services.RegisterCommands(ServiceLifetime.Singleton);
         }
 
         //protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)

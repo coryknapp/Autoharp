@@ -10,11 +10,11 @@ namespace Autoharp
 {
     public class CshtmlLinkedJsRelatedFileDetector : IRelatedFileDetector
     {
-        IDocumentService documentService;
+        IVsSolutionService documentService;
 
         string scriptPattern = @"<script[^>]*\s+src=['""]([^'""]+)['""][^>]*>";
 
-        public CshtmlLinkedJsRelatedFileDetector(IDocumentService documentService)
+        public CshtmlLinkedJsRelatedFileDetector(IVsSolutionService documentService)
         {
             this.documentService = documentService;
         }

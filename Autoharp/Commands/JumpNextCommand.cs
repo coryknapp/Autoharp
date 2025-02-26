@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Autoharp
 {
-    [Command(PackageIds.PopNextCommand)]
-    public sealed class PopNextCommand : BaseDICommand
+    [Command(PackageIds.JumpNextCommand)]
+    public sealed class JumpNextCommand : BaseDICommand
     {
-        private readonly IPopNextService popNextService;
+        private readonly IJumpNextService popNextService;
 
-        public PopNextCommand(DIToolkitPackage package, IPopNextService popNextService) : base(package)
+        public JumpNextCommand(DIToolkitPackage package, IJumpNextService popNextService) : base(package)
         {
             this.popNextService = popNextService;
         }

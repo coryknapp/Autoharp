@@ -9,9 +9,9 @@ namespace Autoharp
 {
     public class CsToCshtmlFileDetector : IRelatedFileDetector
     {
-        IDocumentService documentService;
+        IVsSolutionService documentService;
 
-        public CsToCshtmlFileDetector(IDocumentService documentService)
+        public CsToCshtmlFileDetector(IVsSolutionService documentService)
         {
             this.documentService = documentService;
         }

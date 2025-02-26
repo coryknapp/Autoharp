@@ -1,16 +1,19 @@
-﻿using Community.VisualStudio.Toolkit.DependencyInjection;
-using Microsoft.VisualStudio.Text;
-using Autoharp.Models;
+﻿using Autoharp.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Autoharp.Services
 {
-    public class DocumentService : IDocumentService
+    public class VsSolutionService : IVsSolutionService
     {
         public bool FileExists(File file) =>
-            System.IO.File.Exists(file.FullPath);
+    System.IO.File.Exists(file.FullPath);
 
         public async Task<File> GetCurrentFileAsync()
         {
@@ -25,7 +28,7 @@ namespace Autoharp.Services
 
         public async Task<bool> IsTypeAsync(File file, string type)
         {
-            await this.PopulateFileAsync(file);
+            await this.JumpulateFileAsync(file);
             if (file.TextDocument == null)
             {
                 return false;
@@ -35,16 +38,16 @@ namespace Autoharp.Services
 
         public async Task<string> GetDocumentTextAsync(File file)
         {
-            await this.PopulateFileAsync(file);
+            await this.JumpulateFileAsync(file);
             return file.TextDocument?.TextBuffer.CurrentSnapshot.GetText();
         }
 
         public File GetFileForDocumentView(DocumentView documentView) =>
             new File(documentView?.Document.FilePath);
 
-        private async Task PopulateFileAsync(File file)
+        private async Task JumpulateFileAsync(File file)
         {
-            if (file.TextDocument  == null)
+            if (file.TextDocument == null)
             {
                 var documentView = await VS.Documents.GetDocumentViewAsync(file.FullPath);
                 if (documentView != null)
@@ -58,7 +61,7 @@ namespace Autoharp.Services
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            Solution solution = await VS.Solutions.GetCurrentSolutionAsync();
+            var solution = await VS.Solutions.GetCurrentSolutionAsync();
             List<SolutionItem> list = new List<SolutionItem>();
 
             this.AddItemsToList(list, solution, filter);
@@ -77,6 +80,34 @@ namespace Autoharp.Services
             {
                 AddItemsToList(list, item, filter);
             }
+        }
+
+        public IEnumerable<Token> GetClasses(File file)
+        {
+            this.JumpulateFileAsync(file); 
+
+            var tree = CSharpSyntaxTree.ParseText(file.TextDocument.TextBuffer.CurrentSnapshot.GetText());
+            var root = tree.GetCompilationUnitRoot();
+
+            var classDeclarations = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+
+            return classDeclarations.Select(cd => new Token(cd));
+        }
+
+        public IEnumerable<Token> GetClassAncestors(Token classToken)
+        {
+            var classNode = classToken.node as ClassDeclarationSyntax;
+            return classNode?.BaseList?.Types.Select(t => new Token(t));
+        }
+
+        public bool IsTokenUserDefined(Token c)
+        {
+            throw new NotImplementedException();
+        }
+
+        public File GetFile(Token c)
+        {
+            throw new NotImplementedException();
         }
     }
 }

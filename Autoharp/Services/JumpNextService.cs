@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Autoharp.Services
 {
-    public class PopNextService : IPopNextService
+    public class JumpNextService : IJumpNextService
     {
-        private IDocumentService documentService { get; set; }
+        private IVsSolutionService documentService { get; set; }
 
         private IInformationService informationService { get; set; }
 
@@ -17,11 +17,11 @@ namespace Autoharp.Services
 
         private List<File> RelatedFileList { get; set; }
 
-        private string MostRecentlyPoppedToFilePath { get; set; }
+        private string MostRecentlyJumppedToFilePath { get; set; }
 
         private string OriginFilePath { get; set; }
 
-        public PopNextService(DIToolkitPackage package, IDocumentService documentService, IInformationService informationService)
+        public JumpNextService(DIToolkitPackage package, IVsSolutionService documentService, IInformationService informationService)
         {
             this.documentService = documentService;
             this.informationService = informationService;
@@ -34,7 +34,7 @@ namespace Autoharp.Services
             {
                 package.ServiceProvider.GetService<CsToCshtmlFileDetector>(),
                 package.ServiceProvider.GetService<CshtmlToCsFileDetector>(),
-                package.ServiceProvider.GetService<CsInterfaceFileDetector>(),
+                package.ServiceProvider.GetService<CsClassAncestorsDetector>(),
                 package.ServiceProvider.GetService<CshtmlLinkedJsRelatedFileDetector>(),
             };
         }
@@ -54,9 +54,14 @@ namespace Autoharp.Services
             var documentView = await VS.Documents.GetActiveDocumentViewAsync();
             var filePath = documentView?.Document.FilePath;
 
-            var file = documentService.GetFileForDocumentView(documentView);
+            var currentFile = await documentService.GetCurrentFileAsync();
 
-            this.RelatedFileList = await this.GetRelatedFilesAsync(file);
+            if(currentFile == null)
+            {
+                return;
+            }
+
+            this.RelatedFileList = await this.GetRelatedFilesAsync(currentFile);
             this.OriginFilePath = filePath;
             await informationService.InformResetOriginAsync(this.OriginFilePath, this.RelatedFileList);
         }
@@ -80,7 +85,7 @@ namespace Autoharp.Services
                 }
             }
 
-            this.MostRecentlyPoppedToFilePath = relatedFiles.First().FullPath;
+            this.MostRecentlyJumppedToFilePath = relatedFiles.First().FullPath;
 
             return relatedFiles;
         }
@@ -89,17 +94,46 @@ namespace Autoharp.Services
         {
             var nextPath = this.NextPath();
             await VS.Documents.OpenAsync(nextPath);
-            this.MostRecentlyPoppedToFilePath = nextPath;
+            this.MostRecentlyJumppedToFilePath = nextPath;
         }
 
         private string NextPath()
         {
-            var currentIndex = RelatedFileList.IndexOf(new File(MostRecentlyPoppedToFilePath));
+            var currentIndex = RelatedFileList.IndexOf(new File(MostRecentlyJumppedToFilePath));
             var nextIndex = (currentIndex + 1) % this.RelatedFileList.Count;
             return this.RelatedFileList[nextIndex].FullPath;
         }
 
         private string FormatErrorMessage(IRelatedFileDetector detector, Exception ex) =>
-            $@"Error in ${detector.GetType().Name}: {ex.Message}";
+            $@"Error in {detector.GetType().Name}: {ex.Message}";
+
+        public async Task<bool> IsActiveFileInJumpListAsync()
+        {
+            if (RelatedFileList == null)
+            {
+                return false;
+            }
+
+            var currentFile = await this.documentService.GetCurrentFileAsync();
+            return RelatedFileList.Contains(currentFile);
+        }
+
+        public async Task AddActiveFileToJumpListAsync()
+        {
+            var currentFile = await this.documentService.GetCurrentFileAsync();
+            if (currentFile != null)
+            {
+                RelatedFileList.Add(currentFile);
+            }
+        }
+
+        public async Task RemoveActiveFileFromJumpListAsync()
+        {
+            var currentFile = await this.documentService.GetCurrentFileAsync();
+            if (currentFile != null)
+            {
+                RelatedFileList.Remove(currentFile);
+            }
+        }
     }
 }
